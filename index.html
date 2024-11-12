@@ -9,6 +9,7 @@
     <!-- ESTILOS -->
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <!-- SCRIPTS -->
     <script src="./script.js" defer></script>
@@ -51,7 +52,7 @@
 
       <!-- Listagem de tasks -->
       <section class="tasks__container">
-        <h2>Tarefas</h2>
+        <h2 class="tasks__title" >Tarefas</h2>
         <ul class="tasks__list">
           <!-- Task Exemplo 1 -->
           <li class="task__item">
@@ -59,7 +60,9 @@
               <span class="task-type span-urgent"></span>
               <p>Comprar comida para o gato</p>
             </div>
-            <button class="task__button--remove-task"></button>
+            <button class="task__button--remove-task">
+              <i class="fa-solid fa-trash"></i>
+            </button>
           </li>
           <!-- Task Exemplo 2 -->
           <li class="task__item">
@@ -67,7 +70,9 @@
               <span class="task-type span-important"></span>
               <p>Consertar Computador</p>
             </div>
-            <button class="task__button--remove-task"></button>
+            <button class="task__button--remove-task">
+              <i class="fa-solid fa-trash"></i>
+            </button>
           </li>
           <!-- Task Exemplo 3 -->
           <li class="task__item">
@@ -75,7 +80,9 @@
               <span class="task-type span-normal"></span>
               <p>Beber água</p>
             </div>
-            <button class="task__button--remove-task"></button>
+            <button class="task__button--remove-task">
+              <i class="fa-solid fa-trash"></i>
+            </button>
           </li>
         </ul>
       </section>

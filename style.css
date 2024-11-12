@@ -1,0 +1,154 @@
+body {
+    font-family: Roboto, sans-serif;
+    background-color: #e2e2e2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    background-color: white;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+}
+
+.header__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 150px;
+    width: 100%;
+    max-width: 80%;
+}
+
+.header__title {
+    color: blue;
+    font-size: 22px;
+    font-weight:bolder;
+}
+
+.header__input--search {
+    background-color: #e2e2e2;
+    height: 50px;
+    width: 600px;
+    border-radius: 5px;
+    border: none;
+    padding-left: 2%;
+    font-size: 15px;
+}
+
+.main__container {
+    width: 100%;
+    height: 100%;
+    margin: 0 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form__container {
+    background-color: white;
+    border-radius: 10px;
+    width: 70%;
+    margin: 20px;
+    padding: 40px;
+}
+
+.form__title {
+    font-size: 25px;
+}
+
+.form__input-container {
+    margin-top: 30px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form__input--text {
+    background-color: #e2e2e2;
+    border-radius: 5px;
+    border: none;
+    width: 60%;
+    height: 45px;
+    padding-left: 2%;
+    font-size: 15px;
+}
+
+.form__input--priority {
+    background-color: #e2e2e2;
+    color: gray;
+    border-radius: 5px;
+    border: none;
+    width: 35%;
+    height: 45px;
+    padding-left: 2%;
+    font-size: 15px;
+}
+
+.form__button--add-task {
+    background-color: blue;
+    color: white;
+    width: 100%;
+    height: 55px;
+    border-radius: 5px;
+    font-size: medium;
+}
+
+.tasks__container {
+    background-color: white;
+    border-radius: 10px;
+    width: 70%;
+    margin: 20px;
+    padding: 40px;
+}
+
+.tasks__title {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.task__item {
+    background-color: #f1f3f5;
+    margin-top: 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.task-info__container {
+    display: flex;
+    align-items: center;
+}
+
+.task-type {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 15px;
+}
+
+.span-urgent {
+    background-color: red;
+}
+
+.span-important {
+    background-color: yellow;
+}
+
+.span-normal {
+    background-color: green;
+}
+
+.task__button--remove-task {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 17px;
+    margin-left: auto;
+    margin-right: 20px;
+}
