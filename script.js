@@ -11,115 +11,109 @@ const tasks = [
   {title: "Assistir a um documentário interessante", type: "Normal"},
 ];
 
+function renderElements(array) {
 
-const alterarElemento = document.querySelector(".tasks__list")
+  const referenceElement = document.querySelector(".tasks__list")
+  referenceElement.innerHTML = '';
 
-function createTaskItem(){
-  for (let i = 0; i < tasks.length; i++){
+  for (let i = 0; i < array.length; i++) {
 
-    const taskItem = document.createElement("li")
-    const taskInfo = document.createElement("div")
-    const taskType = document.createElement("span")
-    const taskTitle = document.createElement("p")
-    const taskButton = document.createElement("button")
-    const buttonIcon = document.createElement("i")
+    const task = array[i]
 
-    taskItem.classList.add("task__item")
-    taskInfo.classList.add("task-info__container")
-    taskType.classList.add("task-type")
+    const createItem = createTaskItem(task);
 
-    if (tasks[i].type === "Urgente"){
-      taskType.classList.add("span-urgent") 
-    } else if (tasks[i].type === "Importante"){
-      taskType.classList.add("span-important")
-    } else if (tasks[i].type === "Normal"){
-      taskType.classList.add("span-normal")
+    referenceElement.appendChild(createItem);
+  }
+}
+
+renderElements(tasks)
+
+function createTaskItem(element) {
+
+  const taskItem = document.createElement("li");
+  const taskInfo = document.createElement("div");
+  const taskType = document.createElement("span");
+  const taskTitle = document.createElement("p");
+  const taskButton = document.createElement("button");
+  const taskRemove = document.createElement("i");
+
+  taskItem.classList.add("task__item");
+  taskInfo.classList.add("task-info__container");
+  taskType.classList.add("task-type");
+  taskButton.classList.add("task__button--remove-task");
+  taskRemove.classList.add("fa-solid", "fa-trash");
+
+  if (element.type === "Urgente") {
+    taskType.classList.add("span-urgent")
+  } if (element.type === "Importante") {
+    taskType.classList.add("span-important")
+  } if (element.type === "Normal") {
+    taskType.classList.add("span-normal")
+  }
+
+  taskTitle.innerText = element.title;
+
+  taskItem.appendChild(taskInfo);
+  taskItem.appendChild(taskButton);
+  taskInfo.appendChild(taskType);
+  taskInfo.appendChild(taskTitle);
+  taskButton.appendChild(taskRemove);
+
+  taskButton.addEventListener("click", function () {
+
+    const removeTaskArray = tasks.indexOf(element)
+
+    if (removeTaskArray !== -1) {
+      tasks.splice(removeTaskArray, 1)
     }
 
-    taskTitle.innerText = tasks[i].title
-
-    taskButton.classList.add("task__button--remove-task")
-    buttonIcon.classList.add("fa-solid", "fa-trash")
-
-
-    alterarElemento.appendChild(taskItem)
-
-    taskItem.appendChild(taskInfo)
-    taskItem.appendChild(taskButton)
-
-    taskInfo.appendChild(taskType)
-    taskInfo.appendChild(taskTitle)
-
-    taskButton.appendChild(buttonIcon)
-
-    taskButton.addEventListener("click", function(){
-      taskItem.remove()
-    })
-  }
-}
-
-createTaskItem()
-
-const buttonNewTask = document.querySelector(".form__button--add-task")
-const inputNewTaskTitle = document.querySelector("#input_title")
-const inputNewTaskType = document.querySelector(".form__input--priority")
-
-buttonNewTask.addEventListener("click", function(event){
-
-  event.preventDefault()
-  
-  const newTaskItem = document.createElement("li")
-  const newTaskInfo = document.createElement("div")
-  const newTaskType = document.createElement("span")
-  const newTaskTitle = document.createElement("p")
-  const newTaskButton = document.createElement("button")
-  const newButtonIcon = document.createElement("i")
-
-  newTaskItem.classList.add("task__item")
-  newTaskInfo.classList.add("task-info__container")
-  newTaskType.classList.add("task-type")
-
-  if (inputNewTaskType.value === "urgente"){
-    newTaskType.classList.add("span-urgent") 
-  } else if (inputNewTaskType.value === "importante"){
-    newTaskType.classList.add("span-important")
-  } else if (inputNewTaskType.value === "normal"){
-    newTaskType.classList.add("span-normal")
-  }
-
-  newTaskButton.classList.add("task__button--remove-task")
-  newButtonIcon.classList.add("fa-solid", "fa-trash")
-
-  newTaskTitle.innerText = inputNewTaskTitle.value
-
-  newTaskItem.appendChild(newTaskInfo)
-  newTaskItem.appendChild(newTaskButton)
-
-  newTaskInfo.appendChild(newTaskType)
-  newTaskInfo.appendChild(newTaskTitle)
-
-  newTaskButton.appendChild(newButtonIcon)
-
-  const tasksList = document.querySelector(".tasks__list")
-  tasksList.appendChild(newTaskItem)
-
-  newTaskButton.addEventListener("click", function(){
-    newTaskItem.remove();
+    renderElements(tasks);
   })
 
-  inputNewTaskTitle.value = '';
-  inputNewTaskType.value = '';
+  return taskItem
+}
+
+const newTask = document.querySelector(".form__button--add-task");
+
+newTask.addEventListener('click', function (event) {
+  event.preventDefault()
+
+  const newTitle = document.getElementById("input_title").value;
+  const newType = document.querySelector(".form__input--priority").value;
+
+  if (newTitle && newType) {
+
+    const newTaskItem = {
+      title: newTitle,
+      type: newType
+    }
+
+    tasks.push(newTaskItem);
+    renderElements(tasks);
+
+    document.getElementById("input_title").value = '';
+    document.querySelector(".form__input--priority").value = ''; 
+  }
 })
 
+function searchTask() {
 
-function deleteTask(){
-  const deteleButton = document.querySelectorAll(".task__button--remove-task")
-  deteleButton.forEach((button) => {
-    button.addEventListener("click", function(event){
-      const taskItem = event.target.closest(".task__item")
-      taskItem.remove()
-    })
-  })
+  const searchInput = document.querySelector(".header__input--search").value.toLowerCase();
+  const searchListTasks = document.querySelectorAll(".tasks__list .task__item");
+
+  for (let i = 0; i < searchListTasks.length; i++) {
+
+    const task = searchListTasks[i];
+    const taskText = task.textContent.toLowerCase();
+
+    if (taskText.indexOf(searchInput) !== -1) {
+
+      task.style.display = "flex";
+    } else {
+      task.style.display = "none"
+    }
+  }
 }
 
-deleteTask()
+const searchInput = document.querySelector(".header__input--search");
+searchInput.addEventListener("input", searchTask)
